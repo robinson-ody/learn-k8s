@@ -46,7 +46,7 @@ ticketSchema.set('versionKey', 'version');
 ticketSchema.plugin(updateIfCurrentPlugin);
 
 ticketSchema.statics.findByEvent = async (event: { id: string; version: number }) => {
-  return await Ticket.findOne({ _id: event.id });
+  return await Ticket.findOne({ _id: event.id, version: event.version - 1 });
 };
 
 ticketSchema.statics.build = (attrs: TicketAttrs) =>
