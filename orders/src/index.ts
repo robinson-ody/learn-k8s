@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 import { app } from './app';
 import { natsWrapper } from './nats-wrapper';
 import { TicketCreatedListener } from './events/listeners/ticket-created-listener';
@@ -9,7 +10,7 @@ import { PaymentCreatedListener } from './events/listeners/payment-created-liste
 const PORT = 3000;
 
 (async () => {
-  console.log('Starting...')
+  console.log('Starting the order service...');
 
   if (!process.env.JWT_KEY) throw new Error('JWT_KEY must be defined.');
   if (!process.env.MONGO_URI) throw new Error('MONGO_URI must be defined.');
