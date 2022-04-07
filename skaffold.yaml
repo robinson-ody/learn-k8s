@@ -1,0 +1,68 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/ingress*
+      - ./infra/k8s/nats*
+      - ./infra/k8s/auth*
+      - ./infra/k8s/client*
+      - ./infra/k8s/expiration*
+      - ./infra/k8s/orders*
+      - ./infra/k8s/tickets*
+      - ./infra/k8s/payments*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: robinsonody/auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: robinsonody/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        # manual:
+        #   - src: '**/*.js'
+        #     dest: .
+        infer:
+          - '**/*.js'
+          - '**/*.jsx'
+    - image: robinsonody/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: robinsonody/orders
+      context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: robinsonody/expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: robinsonody/payments
+      context: payments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
