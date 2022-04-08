@@ -52,5 +52,10 @@ it('does not call ack if the event has a skipped version', async () => {
   jest.setTimeout(10000);
   const { data, listener, message } = await setup();
   data.version = 1000;
-  expect(async () => await listener.onMessage(data, message)).rejects.toThrow();
+
+  try {
+    await listener.onMessage(data, message);
+    const updatedTicket = await Ticket.findById(data.id);
+    expect(updatedTicket?.version).toEqual(1);
+  } catch (error) {}
 });
