@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ticketing
+  namespace: default
+spec:
+  dnsNames:
+    - funny-vid.xyz
+  secretName: ticketing-tls
+  issuerRef:
+    name: letsencrypt-cluster-issuer
+    kind: ClusterIssuer
