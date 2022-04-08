@@ -1,10 +1,8 @@
-import express from 'express';
-
 // * so you won't need to wrap everything in trycatch block
 // * this module catch all the exception automatically
 import 'express-async-errors';
 
-import { json } from 'body-parser';
+import express, { json } from 'express';
 import { error_handler, NotFoundError } from '@robin-learn-k8s/common';
 import cookieSession from 'cookie-session';
 
@@ -12,7 +10,15 @@ const app = express();
 
 app.set('trust proxy', true);
 app.use(json());
-app.use(cookieSession({ signed: false, secure: process.env.NODE_ENV !== 'test' }));
+
+app.use(
+  cookieSession({
+    signed: false,
+    secure:
+      // process.env.NODE_ENV !== 'test'
+      false,
+  })
+);
 
 // * import routes
 import { current_user_router } from './routes/current-user';
