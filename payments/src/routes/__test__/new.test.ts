@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import request from 'supertest';
 import { app } from '../../app';
 import { Order } from '../../model/order';
-import { Payment } from '../../model/payment';
+// import { Payment } from '../../model/payment';
 // import { stripe } from '../../stripe';
 
 // jest.mock('../../stripe.ts');
@@ -54,7 +54,7 @@ it('returns a 400 when purchasing a cancelled order', async () => {
     .expect(400);
 });
 
-it.todo('returns a 201 with valid inputs');
+// it.todo('returns a 201 with valid inputs');
 // async () => {
 // const userId = new mongoose.Types.ObjectId().toHexString();
 // const price = Math.floor(Math.random() * 89 + 10);
