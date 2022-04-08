@@ -3,7 +3,8 @@ kind: Config
 deploy:
   kubectl:
     manifests:
-      - ./infra/k8s/ingress*
+      - ./infra/k8s-dev/ingress*
+      - ./infra/k8s-prod/ingress*
       - ./infra/k8s/nats*
       - ./infra/k8s/auth*
       - ./infra/k8s/client*
